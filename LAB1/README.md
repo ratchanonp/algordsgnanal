@@ -10,6 +10,7 @@ In this lab we use 3 difference algorithm to find gcd
 
 ### Sieve Of Eratosthenes Algorithm
 
-## Recursive Algorithm
+## Euclidean Algorithm
+[Euclidean Algorithm Visualization](https://www.geogebra.org/m/ztbesvsd)
 
 ## Performance Result
