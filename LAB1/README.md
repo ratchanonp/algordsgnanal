@@ -1,11 +1,12 @@
-# LAB 1 | Find GCD 
+# LAB 1 | Find GCD
 
-In this lab we use 3 difference algorithm to find gcd 
+In this lab we use 3 difference algorithm to find gcd
+
 1. Find gcd by using prime factorization that used naive algorithm
-2. Find gcd by using prime factorization but used ```sive of eratosthenes```
+2. Find gcd by using prime factorization but used `sive of eratosthenes`
 3. Find gcd by using recursive function
 
-## Prime Factorization 
+## Prime Factorization
 
 ระหว่างการใช้งานเจอปัญหาที่น่าสนใจอันหนึ่งคือถ้าทำเป็น set แล้ว intersection กันหรือเช็คแค่ว่า element ใน list นี้อยู่ในอีก list หรือไม่ List ของ Common Divisor ที่ได้จะไม่ถูกต้อง
 
@@ -38,12 +39,19 @@ print(c1 & c2)
 
 การใช้งาน Counter นี้เร็วกว่าการทำ for loop เช็คเอง เพราะ Counter ใช้ dictionary ในการเก็บข้อมูล
 
+> **วิธีการแก้ปัญหา**
+> เอา List ของ Prime Factor ที่ได้จากทั้งสองตัวมาแปลงเป็น Counter แล้ว intersection กัน แล้วเรียกใช้ method elements ของ Counter ที่ได้จากนั้นแปลงเป็น list แล้วหา product ของ list นั้น
 
 ### Naive Algorithm
 
 ### Sieve Of Eratosthenes Algorithm
 
 ## Euclidean Algorithm
+
 [Euclidean Algorithm Visualization](https://www.geogebra.org/m/ztbesvsd)
 
 ## Performance Result
+
+```
+
+```
