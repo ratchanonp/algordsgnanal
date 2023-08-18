@@ -48,10 +48,10 @@ print(c1 & c2)
 
 ## Euclidean Algorithm
 
+Why Euclidean Algorithm is faster than prime factorization algorithm?
+This is why
 [Euclidean Algorithm Visualization](https://www.geogebra.org/m/ztbesvsd)
 
 ## Performance Result
 
-```
-
-```
+![Perfromance Result](./plot.png)
