@@ -14,7 +14,7 @@ Path คือ ลำดับของ vertex ที่เชื่อมกั
 
 ### Hamiltonian Path/Cycle
 
-็Hamiltonian Path คือ Path ที่เดินทางผ่านทุก vertex ที่มีใน graph และเดินทางเส้นตรงเท่านั้นไม่ซ้ำ vertex ที่เดินทางแล้ว แต่ไม่จำเป็นต้องเดินทางผ่านทุก edge ใน graph และเริ่มต้นจาก vertex ใดก็ได้
+Hamiltonian Path คือ Path ที่เดินทางผ่านทุก vertex ที่มีใน graph และเดินทางเส้นตรงเท่านั้นไม่ซ้ำ vertex ที่เดินทางแล้ว แต่ไม่จำเป็นต้องเดินทางผ่านทุก edge ใน graph และเริ่มต้นจาก vertex ใดก็ได้
 
 Hamiltonian Cycle คือ Hamiltonian Path ที่เริ่มต้นและสิ้นสุดที่ vertex เดียวกัน
 
