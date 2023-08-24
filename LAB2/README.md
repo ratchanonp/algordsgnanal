@@ -1,4 +1,4 @@
-# LAB 1 | Find Path and Hamiltonian (Brute force)
+# LAB 2 | Find Path and Hamiltonian (Brute force)
 
 ในแลปนี้ใช้ Brute force algorithm เพื่อ traverse ไปใน Undireted Graph ที่ Represent ด้วย Adjacency Matrix
 
