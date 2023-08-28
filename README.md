@@ -1,4 +1,4 @@
-#  ALGOR DSGN ANAL
+#  🔎 ALGOR DSGN ANAL
 
 > Solution By **[Ratchanon Panmas](https://fb.com/qq.panmas)**
 
