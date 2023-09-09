@@ -1,4 +1,6 @@
 Amount: 12
+Time taken: 1 μs
+Non-DP Time taken: 11 μs
 Number of ways: 4
-Time taken: 0 ns
+Denomination: (10, 2), (6, 6), (6, 2, 2, 2), (2, 2, 2, 2, 2, 2)
 

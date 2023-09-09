@@ -1,4 +1,6 @@
 Amount: 49
+Time taken: 14 μs
+Non-DP Time taken: 374 μs
 Number of ways: 0
-Time taken: 15 μs
+Denomination: 
 

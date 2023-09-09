@@ -1,4 +1,5 @@
 Amount: 9036
+Time taken: 196 ms
 Number of ways: 1359941436
-Time taken: 195 ms
+Denomination: 
 

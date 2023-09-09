@@ -2,6 +2,32 @@
 
 using namespace std;
 
+int count_non_dp(vector<int> &coins, int n, int sum, vector<int> tempDenomination, vector<vector<int>> &denominations)
+{
+    // Base Case
+    if (sum == 0)
+    {
+        denominations.push_back(tempDenomination);
+        return 1;
+    }
+
+    // If number of coins is 0 or sum is less than 0 then
+    // there is no way to make the sum.
+    if (n == 0 || sum < 0)
+        return 0;
+
+    // Two options for the current coin
+    // Include the current coin
+    tempDenomination.push_back(coins[n - 1]);
+    int include = count_non_dp(coins, n, sum - coins[n - 1], tempDenomination, denominations);
+
+    // Exclude the current coin
+    tempDenomination.pop_back();
+    int exclude = count_non_dp(coins, n - 1, sum, tempDenomination, denominations);
+
+    return include + exclude;
+}
+
 int count(vector<int> &coins, int n, int sum, vector<vector<int>> &dp)
 {
     // Base Case
@@ -132,11 +158,24 @@ int main()
     int result = count(coins, n, amount, dp);
     auto end = chrono::high_resolution_clock::now();
 
-    printf("Number of ways: %d\n", result);
-
-   
-    //displayDenomination(denomination);
     displayTime(end - start);
+
+    vector<vector<int>> denomination;
+    vector<int> tempDenomination;
+
+    if (result < 5e5)
+    {
+
+        auto start_nonDP = chrono::high_resolution_clock::now();
+        count_non_dp(coins, n, amount, tempDenomination, denomination);
+        auto end_nonDP = chrono::high_resolution_clock::now();
+        printf("Non-DP ");
+        displayTime(end_nonDP - start_nonDP);
+    }
+
+    printf("Number of ways: %d\n", result);
+    displayDenomination(denomination);
+
     // displayTable(dp, coins);
 
     printf("\n");

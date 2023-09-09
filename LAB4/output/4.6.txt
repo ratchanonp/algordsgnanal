@@ -1,4 +1,6 @@
 Amount: 22
-Number of ways: 1
 Time taken: 0 ns
+Non-DP Time taken: 8 μs
+Number of ways: 1
+Denomination: (8, 7, 7)
 

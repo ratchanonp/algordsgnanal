@@ -1,4 +1,6 @@
 Amount: 31
-Number of ways: 0
 Time taken: 3 μs
+Non-DP Time taken: 53 μs
+Number of ways: 0
+Denomination: 
 
