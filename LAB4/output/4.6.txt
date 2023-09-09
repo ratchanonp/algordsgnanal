@@ -1,5 +1,4 @@
 Amount: 22
 Number of ways: 1
-Denomination: (8, 7, 7)
-Time taken: 2 μs
+Time taken: 0 ns
 

@@ -1,5 +1,4 @@
 Amount: 25
 Number of ways: 8
-Denomination: (9, 9, 7), (9, 7, 3, 3, 3), (9, 5, 5), (7, 7), (7, 5, 5, 5), (7, 3, 3, 3), (5, 5, 5, 5, 5), (5, 5)
-Time taken: 5 μs
+Time taken: 2 μs
 

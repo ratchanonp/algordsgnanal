@@ -1,5 +1,4 @@
 Amount: 12
 Number of ways: 4
-Denomination: (10, 2), (6, 6), (6, 2, 2), (2, 2, 2)
-Time taken: 3 μs
+Time taken: 0 ns
 

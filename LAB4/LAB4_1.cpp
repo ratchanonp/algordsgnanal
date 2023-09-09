@@ -2,12 +2,11 @@
 
 using namespace std;
 
-int count(vector<int> &coins, int n, int sum, vector<vector<int>> &dp, vector<vector<int>> &denomination, vector<int> &temp_denomination)
+int count(vector<int> &coins, int n, int sum, vector<vector<int>> &dp)
 {
     // Base Case
     if (sum == 0)
     {
-        denomination.push_back(temp_denomination);
         return dp[n][sum] = 1;
     }
 
@@ -20,17 +19,19 @@ int count(vector<int> &coins, int n, int sum, vector<vector<int>> &dp, vector<ve
     // simply return the result
     if (dp[n][sum] != -1)
     {
+
         if (dp[n][sum] > 0)
-            denomination.push_back(temp_denomination);
-        return dp[n][sum];
+        {
+            return dp[n][sum];
+        }
     }
 
     // Two options for the current coin
-    temp_denomination.push_back(coins[n - 1]);
-    int include = count(coins, n, sum - coins[n - 1], dp, denomination, temp_denomination);
+    // Include the current coin
+    int include = count(coins, n, sum - coins[n - 1], dp);
 
-    temp_denomination.pop_back();
-    int exclude = count(coins, n - 1, sum, dp, denomination, temp_denomination);
+    // Exclude the current coin
+    int exclude = count(coins, n - 1, sum, dp);
 
     return dp[n][sum] = include + exclude;
 }
@@ -126,17 +127,15 @@ int main()
     // printf("\n");
 
     vector<vector<int>> dp(n + 1, vector<int>(amount + 1, -1));
-    vector<vector<int>> denomination;
-    vector<int> temp_denomination;
 
     auto start = chrono::high_resolution_clock::now();
-    int result = count(coins, n, amount, dp, denomination, temp_denomination);
+    int result = count(coins, n, amount, dp);
     auto end = chrono::high_resolution_clock::now();
 
     printf("Number of ways: %d\n", result);
 
-    // Display Denomination
-    displayDenomination(denomination);
+   
+    //displayDenomination(denomination);
     displayTime(end - start);
     // displayTable(dp, coins);
 
