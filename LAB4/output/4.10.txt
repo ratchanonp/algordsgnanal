@@ -1,0 +1,5 @@
+Amount: 49
+Number of ways: 0
+Denomination: 
+Time taken: 3 μs
+
