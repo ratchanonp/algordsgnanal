@@ -1,0 +1,11 @@
+41.5463
+Triangulation: 
+0 1 4
+1 2 4
+2 3 4
+Sorted coordinates: 
+[0] 1 2
+[1] 4 3
+[2] 5 7
+[3] 3 10
+[4] 0 7
