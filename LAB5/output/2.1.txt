@@ -1,0 +1,14 @@
+Time: 5μs
+Min cost: 57.6061
+Triangulation: 
+0 2 5
+0 1 2
+2 3 5
+3 4 5
+Sorted coordinates: 
+[0] 0 0
+[1] 1 0
+[2] 4 3
+[3] 5 7
+[4] 1 10
+[5] 0 8

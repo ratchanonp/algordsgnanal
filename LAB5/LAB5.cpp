@@ -106,7 +106,15 @@ int main()
     vector<vector<double>> dp = vector<vector<double>>(nVertices, vector<double>(nVertices, -1));
     vector<vector<int>> triangular = vector<vector<int>>(nVertices, vector<int>(nVertices, -1));
 
-    cout << minTriangulation(vectices, 0, nVertices - 1, dp, triangular) << endl;
+    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+    double minCost = minTriangulation(vectices, 0, nVertices - 1, dp, triangular);
+    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+
+    chrono::duration<double> time = chrono::duration_cast<chrono::duration<double>>(end - start);
+
+    // cast to microseconds
+    cout << "Time: " << time.count() * 1000000 << "\u03BCs" << endl;
+    cout << "Min cost: " << minCost << endl;
 
     cout << "Triangulation: \n";
     printTriangulation(triangular, 0, nVertices - 1);
