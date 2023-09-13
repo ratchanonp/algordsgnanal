@@ -8,7 +8,7 @@ file_name=$(basename $input_path)
 output_path="${input_path%.*}"
 
 # Compile file
-g++-13 --std=c++17 -o $output_path $input_path
+g++-13 --std=c++17 -Wno-psabi -o $output_path $input_path
 
 # Get test case directory path
 test_case_dir_path=$2
