@@ -100,7 +100,7 @@ int main()
     }
 
     // Sort coordinates counter-clockwise
-    sortCoordinates(vectices);
+    // sortCoordinates(vectices);
 
     // Initialize dp and triangular table
     vector<vector<double>> dp = vector<vector<double>>(nVertices, vector<double>(nVertices, -1));
@@ -114,7 +114,8 @@ int main()
 
     // cast to microseconds
     cout << "Time: " << time.count() * 1000000 << "\u03BCs" << endl;
-    cout << "Min cost: " << minCost << endl;
+
+    cout << "Min cost: " << setprecision(10) << minCost << endl;
 
     cout << "Triangulation: \n";
     printTriangulation(triangular, 0, nVertices - 1);
