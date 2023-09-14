@@ -1,4 +1,4 @@
-Time: 17166μs
+Time: 17068μs
 Min cost: 89.4806
 Triangulation: 
 0 1 99
