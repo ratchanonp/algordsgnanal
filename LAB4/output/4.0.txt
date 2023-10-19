@@ -1,6 +1,5 @@
 Amount: 5
-Time taken: 0 ns
-Non-DP Time taken: 10 μs
-Number of ways: 5
-Denomination: (3, 2), (3, 1, 1), (2, 2, 1), (2, 1, 1, 1), (1, 1, 1, 1, 1)
-
+coins: 1 2 3 
+minimum number of coins: 2
+coins: 3 2 
+Time: 1e-06 seconds

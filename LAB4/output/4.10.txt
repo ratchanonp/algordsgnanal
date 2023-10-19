@@ -1,6 +1,1 @@
-Amount: 49
-Time taken: 14 μs
-Non-DP Time taken: 374 μs
-Number of ways: 0
-Denomination: 
-
+No solution

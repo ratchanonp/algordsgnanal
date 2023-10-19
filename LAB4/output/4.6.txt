@@ -1,6 +1,5 @@
 Amount: 22
-Time taken: 0 ns
-Non-DP Time taken: 8 μs
-Number of ways: 1
-Denomination: (8, 7, 7)
-
+coins: 7 8 9 
+minimum number of coins: 3
+coins: 8 7 7 
+Time: 1e-06 seconds

@@ -1,6 +1,5 @@
 Amount: 28
-Time taken: 2 μs
-Non-DP Time taken: 47 μs
-Number of ways: 9
-Denomination: (7, 7, 7, 7), (7, 7, 7, 5, 2), (7, 7, 5, 5, 2, 2), (7, 7, 2, 2, 2, 2, 2, 2, 2), (7, 5, 5, 5, 2, 2, 2), (7, 5, 2, 2, 2, 2, 2, 2, 2, 2), (5, 5, 5, 5, 2, 2, 2, 2), (5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2), (2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
-
+coins: 2 5 7 
+minimum number of coins: 4
+coins: 7 7 7 7 
+Time: 1e-06 seconds

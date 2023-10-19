@@ -23,16 +23,16 @@ void sortCoordinates(vector<pair<double, double>> &vectices)
     median.second /= vectices.size();
 
     // Sort coordinates counter-clockwise
-    sort(vectices.begin(), vectices.end(), [median](pair<double, double> a, pair<double, double> b)
+    sort(vectices.begin(),
+         vectices.end(),
+         [median](pair<double, double> a, pair<double, double> b)
          { return getAngle(median, a) < getAngle(median, b); });
 }
 
 void printTriangulation(vector<vector<int>> &triangular, int i, int k)
 {
     if (k < i + 2)
-    {
         return;
-    }
 
     int j = triangular[i][k];
     cout << i << " " << j << " " << k << endl;
@@ -65,12 +65,12 @@ double minTriangulation(vector<pair<double, double>> &vectices, int i, int k, ve
         return 0;
     }
 
-    double minCost = INT_MAX;
+    double minCost = INT_MIN;
 
     for (int j = i + 1; j < k; j++)
     {
         double calculatedCost = minTriangulation(vectices, i, j, dp, triangular) + minTriangulation(vectices, j, k, dp, triangular) + cost(vectices, i, j, k);
-        if (calculatedCost < minCost)
+        if (calculatedCost > minCost)
         {
             triangular[i][k] = j;
             minCost = calculatedCost;
@@ -100,7 +100,7 @@ int main()
     }
 
     // Sort coordinates counter-clockwise
-    // sortCoordinates(vectices);
+    sortCoordinates(vectices);
 
     // Initialize dp and triangular table
     vector<vector<double>> dp = vector<vector<double>>(nVertices, vector<double>(nVertices, -1));
@@ -120,11 +120,19 @@ int main()
     cout << "Triangulation: \n";
     printTriangulation(triangular, 0, nVertices - 1);
 
-    cout << "Sorted coordinates: \n";
+    cout << "Trianglular table: \n";
     for (int i = 0; i < nVertices; i++)
     {
-        cout << "[" << i << "] " << vectices[i].first << " " << vectices[i].second << endl;
+        for (int j = 0; j < nVertices; j++)
+        {
+            printf("%2d", triangular[i][j]);
+        }
+        printf("\n");
     }
+
+    cout << "Sorted coordinates: \n";
+    for (int i = 0; i < nVertices; i++)
+        cout << "[" << i << "] " << vectices[i].first << " " << vectices[i].second << endl;
 
     return 0;
 }
