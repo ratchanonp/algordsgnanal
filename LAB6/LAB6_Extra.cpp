@@ -19,9 +19,13 @@ void DFS(vector<vector<int>> &graph, int u, vector<bool> &visited, stack<int> &s
 
 void DFSUtil(vector<vector<int>> &graph, int u, vector<bool> &visited, vector<int> &component)
 {
+    // 1. Mark the current node as visited
     visited[u] = true;
+
+    // 2. Add the current node to the component
     component.push_back(u);
 
+    // 3. For each neighbor of the current node, call DFSUtil() if it has not been visited
     for (auto v : graph[u])
     {
         if (!visited[v])
@@ -59,6 +63,7 @@ vector<vector<int>> findStronglyConnectedComponents(vector<vector<int>> &graph)
     // Second DFS to find the SCCs
     vector<vector<int>> SCCs;
     visited.assign(n, false);
+
     while (!st.empty())
     {
         int u = st.top();
@@ -113,15 +118,15 @@ int main()
 
         vector<vector<int>> SCCs = findStronglyConnectedComponents(graph);
 
-        // printf("Number of strongly connected components: %d\n", SCCs.size());
-        // for (auto SCC : SCCs)
-        // {
-        //     for (int i = 0; i < SCC.size(); i++)
-        //     {
-        //         printf("%d ", SCC[i]);
-        //     }
-        //     printf("\n");
-        // }
+        printf("Number of strongly connected components: %d\n", SCCs.size());
+        for (auto SCC : SCCs)
+        {
+            for (int i = 0; i < SCC.size(); i++)
+            {
+                printf("%d ", SCC[i]);
+            }
+            printf("\n");
+        }
 
         if (SCCs.size() == 1)
         {
