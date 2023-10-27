@@ -44,7 +44,7 @@ void printPath(vector<vector<int>> &predecessor, int src, int dest)
 
     if (src == dest)
     {
-        cout << src << " ";
+        cout << src;
     }
     else if (predecessor[src][dest] == -1)
     {
@@ -53,7 +53,7 @@ void printPath(vector<vector<int>> &predecessor, int src, int dest)
     else
     {
         printPath(predecessor, src, predecessor[src][dest]);
-        cout << dest << " ";
+        cout << "->" << dest;
     }
 }
 
@@ -77,16 +77,15 @@ void solve(vector<vector<int>> dist, vector<vector<int>> predecessor, int src, i
     }
 }
 
-// Floyd-Warshall algorithm
 pair<vector<vector<int>>, vector<vector<int>>> floydWarshall(vector<vector<int>> adjMatrix)
 {
-    int n = adjMatrix.size();
-    vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
-    vector<vector<int>> predecessor(n, vector<int>(n, -1));
+    int nVertices = adjMatrix.size();
+    vector<vector<int>> dist(nVertices, vector<int>(nVertices, INT_MAX));
+    vector<vector<int>> predecessor(nVertices, vector<int>(nVertices, -1));
 
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < nVertices; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 1; j < nVertices; j++)
         {
             if (i == j)
             {
@@ -100,15 +99,15 @@ pair<vector<vector<int>>, vector<vector<int>>> floydWarshall(vector<vector<int>>
         }
     }
 
-    for (int k = 0; k < n; k++)
+    for (int k = 1; k < nVertices; k++)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i < nVertices; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 1; j < nVertices; j++)
             {
                 if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX)
                 {
-                    int newDist = min(dist[i][j], max(dist[i][k], dist[k][j]));
+                    int newDist = max(dist[i][k], dist[k][j]);
 
                     if (newDist < dist[i][j])
                     {
