@@ -102,11 +102,12 @@ vector<int> sortSeq(vector<int> seq, vector<tuple<int, int, int>> triplets)
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
 
     int n;
+    cout << "Enter n: ";
     cin >> n;
 
     vector<int> seq(n + 1);
@@ -114,15 +115,18 @@ int main()
 
     vector<tuple<int, int, int>> triplets = generateTriplets(seq);
 
-    for (auto triplet : triplets)
+    // for (auto triplet : triplets)
+    // {
+    //     cout << get<0>(triplet) << " " << get<1>(triplet) << " " << get<2>(triplet) << endl;
+    // }
+
+    cout << "Enter check: ";
+
+    vector<int> check(n + 1);
+    for (int i = 0; i <= n; i++)
     {
-        cout << get<0>(triplet) << " " << get<1>(triplet) << " " << get<2>(triplet) << endl;
+        cin >> check[i];
     }
-
-    // generate all permutations of seq
-    vector<vector<int>> permutations;
-
-    vector<int> check = {0, 8, 4, 12, 2, 10, 14, 6, 9, 1, 5, 3, 13, 11, 7};
 
     if (validate(check, triplets))
     {
