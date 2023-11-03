@@ -64,43 +64,31 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int N = 20;
+    int n;
+    cin >> n;
 
-    for (int n = 2; n <= N; n += 2)
+    vector<int> seq(n + 1);
+
+    iota(seq.begin(), seq.end(), 0);
+
+    chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
+
+    vector<tuple<int, int, int>> triplets = generateTriplets(seq);
+
+    do
     {
-        chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
-        vector<int> seq(n + 1);
-        iota(seq.begin(), seq.end(), 0);
-
-        vector<tuple<int, int, int>> triplets = generateTriplets(seq);
-
-        vector<vector<int>> permutations;
-
-        cout << n << " -> ";
-
-        do
+        if (validate(seq, triplets))
         {
-            bool found = false;
+            for (auto i : seq)
+                cout << i << " ";
 
-            if (validate(seq, triplets))
-            {
-                for (auto i : seq)
-                {
-                    cout << i << " ";
-                }
+            break;
+        }
+    } while (next_permutation(seq.begin(), seq.end()));
 
-                found = true;
-            }
-
-            if (found)
-                break;
-        } while (next_permutation(seq.begin(), seq.end()));
-        chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
-
-        chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(t2 - t1);
-
-        cout << " | " << time_span.count() << " seconds." << endl;
-    }
+    chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
+    chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(t2 - t1);
+    cout << " | " << time_span.count() << " seconds." << endl;
 
     return 0;
 }
