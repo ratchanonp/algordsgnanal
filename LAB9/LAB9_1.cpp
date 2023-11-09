@@ -14,79 +14,95 @@ struct KMP_Result
     vector<Match> matches;       // list of matches
 };
 
+vector<int> calculate_prefix_function(vector<char> pattern)
+{
+    int patternSize = pattern.size();
+
+    vector<int> prefix_function(patternSize);
+
+    prefix_function[1] = 0;
+
+    int k = 0;
+
+    for (int q = 2; q <= patternSize; q++)
+    {
+        while (k > 0 && pattern[k + 1] != pattern[q])
+            k = prefix_function[k];
+        if (pattern[k + 1] == pattern[q])
+            k = k + 1;
+
+        prefix_function[q] = k;
+    }
+
+    return prefix_function;
+}
+
+vector<Match> KMP_MATCHER(vector<char> text, vector<char> pattern)
+{
+    vector<Match> matches;
+    int textSize = text.size() - 1;
+    int patternSize = pattern.size() - 1;
+
+    vector<int> prefix_function = calculate_prefix_function(pattern);
+
+    int q = 0;
+
+    for (int i = 1; i <= textSize; i++)
+    {
+        while (q > 0 && pattern[q + 1] != text[i])
+            q = prefix_function[q];
+        if (pattern[q + 1] == text[i])
+            q = q + 1;
+        if (q == patternSize)
+        {
+            // Save start position
+            Match match;
+            match.start = i - patternSize + 1;
+            matches.push_back(match);
+            q = prefix_function[q];
+        }
+    }
+
+    return matches;
+}
+
 KMP_Result KMP(vector<char> pattern, vector<char> text)
 {
     KMP_Result result;
-    int patternSize = pattern.size();
-    int textSize = text.size();
+    vector<Match> matches;
 
+    // Do normal KMP
     // Calculate prefix function
-    vector<int> prefix_function(patternSize);
-    prefix_function[0] = 0;
-    for (int i = 1; i < patternSize; i++)
+    result.prefix_function = calculate_prefix_function(pattern);
+    // Find match
+    matches = KMP_MATCHER(text, pattern);
+
+    // Loop through all matches mark as LR
+    for (int i = 0; i < matches.size(); i++)
     {
-        int j = prefix_function[i - 1];
-        while (j > 0 && pattern[i] != pattern[j])
-            j = prefix_function[j - 1];
-        if (pattern[i] == pattern[j])
-            j++;
-        prefix_function[i] = j;
+        matches[i].direction[0] = 'L';
+        matches[i].direction[1] = 'R';
     }
 
-    result.prefix_function = prefix_function;
+    // Save into result
+    result.matches.insert(result.matches.end(), matches.begin(), matches.end());
 
-    // KMP
-    int j = 0;
-    for (int i = 0; i < textSize; i++)
+    // Do KMP with reverse pattern
+    reverse(pattern.begin() + 1, pattern.end());
+
+    // Find match
+    matches = KMP_MATCHER(text, pattern);
+
+    // Loop through all matches mark as RL
+    for (int i = 0; i < matches.size(); i++)
     {
-        while (j > 0 && text[i] != pattern[j])
-            j = prefix_function[j - 1];
-        if (text[i] == pattern[j])
-            j++;
-        if (j == patternSize)
-        {
-            Match match;
-            match.start = i - patternSize + 2;
-            match.direction[0] = 'L';
-            match.direction[1] = 'R';
-            result.matches.push_back(match);
-            j = prefix_function[j - 1];
-        }
+        matches[i].start = matches[i].start + pattern.size() - 2;
+        matches[i].direction[0] = 'R';
+        matches[i].direction[1] = 'L';
     }
 
-    // Reverse pattern
-    reverse(pattern.begin(), pattern.end());
-
-    // Calculate prefix function
-    prefix_function[0] = 0;
-    for (int i = 1; i < patternSize; i++)
-    {
-        int j = prefix_function[i - 1];
-        while (j > 0 && pattern[i] != pattern[j])
-            j = prefix_function[j - 1];
-        if (pattern[i] == pattern[j])
-            j++;
-        prefix_function[i] = j;
-    }
-
-    // KMP for reverse pattern
-    j = 0;
-    for (int i = 0; i < textSize; i++)
-    {
-        while (j > 0 && text[i] != pattern[j])
-            j = prefix_function[j - 1];
-        if (text[i] == pattern[j])
-            j++;
-        if (j == patternSize)
-        {
-            Match match;
-            match.start = i + 1;
-            match.direction[0] = 'R';
-            match.direction[1] = 'L';
-            result.matches.push_back(match);
-            j = prefix_function[j - 1];
-        }
-    }
+    // Save into result
+    result.matches.insert(result.matches.end(), matches.begin(), matches.end());
 
     return result;
 }
@@ -115,23 +131,23 @@ int main()
     // Get pattern and text size
     cin >> patternSize >> textSize;
 
-    vector<char> pattern(patternSize);
-    vector<char> text(textSize);
+    vector<char> pattern(patternSize + 1);
+    vector<char> text(textSize + 1);
 
     // Get pattern
-    for (int i = 0; i < patternSize; i++)
+    for (int i = 1; i <= patternSize; i++)
         cin >> pattern[i];
 
     // Get text
-    for (int i = 0; i < textSize; i++)
+    for (int i = 1; i <= textSize; i++)
         cin >> text[i];
 
     // Run Knuth-Morris-Pratt algorithm
     KMP_Result result = KMP(pattern, text);
 
     // Print Prefix function
-    for (auto c : result.prefix_function)
-        cout << c << " ";
+    for (int i = 1; i <= patternSize; i++)
+        cout << result.prefix_function[i] << " ";
     cout << endl;
 
     // Print number of matches
