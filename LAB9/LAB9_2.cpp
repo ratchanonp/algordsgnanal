@@ -35,29 +35,6 @@ vector<Match> naiveStringMatching(vector<char> pattern, vector<char> text)
         }
     }
 
-    reverse(pattern.begin(), pattern.end());
-
-    for (int i = 0; i < textSize - patternSize + 1; i++)
-    {
-        bool match = true;
-        for (int j = 0; j < patternSize; j++)
-        {
-            if (text[i + j] != pattern[j])
-            {
-                match = false;
-                break;
-            }
-        }
-        if (match)
-        {
-            Match m;
-            m.start = patternSize + i;
-            m.direction[0] = 'R';
-            m.direction[1] = 'L';
-            matches.push_back(m);
-        }
-    }
-
     return matches;
 }
 
@@ -99,13 +76,22 @@ int main()
     // Naive String Matching
     vector<Match> matches = naiveStringMatching(pattern, text);
 
+    // Reverse pattern
+    reverse(pattern.begin(), pattern.end());
+
+    // Naive String Matching with reverse pattern
+    vector<Match> reverseMatches = naiveStringMatching(pattern, text);
+
     cout << "Naive String Matching Don't have prefix function" << endl;
 
     // Print result
-    cout << matches.size() << endl;
+    cout << matches.size() + reverseMatches.size() << endl;
 
     for (Match m : matches)
         cout << m.start << " " << m.direction[0] << m.direction[1] << endl;
+
+    for (Match m : reverseMatches)
+        cout << m.start + patternSize - 1 << " " << m.direction[1] << m.direction[0] << endl;
 
     return 0;
 }
