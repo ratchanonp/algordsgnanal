@@ -96,7 +96,7 @@ KMP_Result KMP(vector<char> pattern, vector<char> text)
     // Loop through all matches mark as RL
     for (int i = 0; i < matches.size(); i++)
     {
-        matches[i].start = matches[i].start + pattern.size() - 2;
+        matches[i].start = matches[i].start + (pattern.size() - 1) - 1;
         matches[i].direction[0] = 'R';
         matches[i].direction[1] = 'L';
     }
