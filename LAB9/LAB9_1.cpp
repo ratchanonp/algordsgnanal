@@ -8,12 +8,6 @@ struct Match
     char direction[2]; // LR or RL
 };
 
-struct KMP_Result
-{
-    vector<int> prefix_function; // prefix function
-    vector<Match> matches;       // list of matches
-};
-
 vector<int> calculate_prefix_function(vector<char> pattern)
 {
     int patternSize = pattern.size();
@@ -58,53 +52,16 @@ vector<Match> KMP_MATCHER(vector<char> text, vector<char> pattern)
             // Save start position
             Match match;
             match.start = i - patternSize + 1;
+            match.direction[0] = 'L';
+            match.direction[1] = 'R';
+
             matches.push_back(match);
+
             q = prefix_function[q];
         }
     }
 
     return matches;
-}
-
-KMP_Result KMP(vector<char> pattern, vector<char> text)
-{
-    KMP_Result result;
-    vector<Match> matches;
-
-    // Do normal KMP
-    // Calculate prefix function
-    result.prefix_function = calculate_prefix_function(pattern);
-    // Find match
-    matches = KMP_MATCHER(text, pattern);
-
-    // Loop through all matches mark as LR
-    for (int i = 0; i < matches.size(); i++)
-    {
-        matches[i].direction[0] = 'L';
-        matches[i].direction[1] = 'R';
-    }
-
-    // Save into result
-    result.matches.insert(result.matches.end(), matches.begin(), matches.end());
-
-    // Do KMP with reverse pattern
-    reverse(pattern.begin() + 1, pattern.end());
-
-    // Find match
-    matches = KMP_MATCHER(text, pattern);
-
-    // Loop through all matches mark as RL
-    for (int i = 0; i < matches.size(); i++)
-    {
-        matches[i].start = matches[i].start + (pattern.size() - 1) - 1;
-        matches[i].direction[0] = 'R';
-        matches[i].direction[1] = 'L';
-    }
-
-    // Save into result
-    result.matches.insert(result.matches.end(), matches.begin(), matches.end());
-
-    return result;
 }
 
 int main()
@@ -142,20 +99,32 @@ int main()
     for (int i = 1; i <= textSize; i++)
         cin >> text[i];
 
+    // Prefix function
+    vector<int> prefix_function = calculate_prefix_function(pattern);
+
     // Run Knuth-Morris-Pratt algorithm
-    KMP_Result result = KMP(pattern, text);
+    vector<Match> matches = KMP_MATCHER(text, pattern);
+
+    // Reverse pattern
+    reverse(pattern.begin() + 1, pattern.end());
+
+    // Run Knuth-Morris-Pratt algorithm with reverse pattern
+    vector<Match> matches_reverse = KMP_MATCHER(text, pattern);
 
     // Print Prefix function
     for (int i = 1; i <= patternSize; i++)
-        cout << result.prefix_function[i] << " ";
+        cout << prefix_function[i] << " ";
     cout << endl;
 
     // Print number of matches
-    cout << result.matches.size() << endl;
+    cout << matches.size() + matches_reverse.size() << endl;
 
     // Print all matches with start position and direction
-    for (auto match : result.matches)
-        cout << match.start << " " << match.direction[0] << match.direction[1] << endl;
+    for (Match m : matches)
+        cout << m.start << " " << m.direction[0] << m.direction[1] << endl;
+
+    for (Match m : matches_reverse)
+        cout << m.start + patternSize - 1 << " " << m.direction[0] << m.direction[1] << endl;
 
     return 0;
 }
