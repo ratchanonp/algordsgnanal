@@ -4,14 +4,14 @@ using namespace std;
 
 struct Match
 {
-    int start;
+    int start;         // start position of match
     char direction[2]; // LR or RL
 };
 
 struct KMP_Result
 {
-    vector<int> prefix_function;
-    vector<Match> matches;
+    vector<int> prefix_function; // prefix function
+    vector<Match> matches;       // list of matches
 };
 
 KMP_Result KMP(vector<char> pattern, vector<char> text)
@@ -69,7 +69,7 @@ KMP_Result KMP(vector<char> pattern, vector<char> text)
         prefix_function[i] = j;
     }
 
-    // KMP
+    // KMP for reverse pattern
     j = 0;
     for (int i = 0; i < textSize; i++)
     {
@@ -109,26 +109,35 @@ int main()
         chars.push_back(c);
     }
 
+    // Get pattern and text
     int patternSize, textSize;
+
+    // Get pattern and text size
     cin >> patternSize >> textSize;
 
     vector<char> pattern(patternSize);
     vector<char> text(textSize);
 
+    // Get pattern
     for (int i = 0; i < patternSize; i++)
         cin >> pattern[i];
 
+    // Get text
     for (int i = 0; i < textSize; i++)
         cin >> text[i];
 
+    // Run Knuth-Morris-Pratt algorithm
     KMP_Result result = KMP(pattern, text);
 
+    // Print Prefix function
     for (auto c : result.prefix_function)
         cout << c << " ";
     cout << endl;
 
+    // Print number of matches
     cout << result.matches.size() << endl;
 
+    // Print all matches with start position and direction
     for (auto match : result.matches)
         cout << match.start << " " << match.direction[0] << match.direction[1] << endl;
 
