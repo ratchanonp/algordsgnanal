@@ -1,0 +1,4 @@
+A B C
+15 26
+A B C A B C A B C A B A B A B
+A B A B C C A B C A B A B A B A B B A C B A C B A B
