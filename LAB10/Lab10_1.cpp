@@ -105,7 +105,7 @@ int main()
         {
             for (auto vertex : vertexCover)
             {
-                cout << vertex << " ";
+                cout << vertex + 1 << " ";
             }
             cout << endl;
         }
