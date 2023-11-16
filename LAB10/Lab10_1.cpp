@@ -100,7 +100,7 @@ int main()
     }
     else
     {
-        cout << "Yes" << nVertexCover << endl;
+        cout << "Yes" << endl;
         for (auto vertexCover : vertexCoverList)
         {
             for (auto vertex : vertexCover)
