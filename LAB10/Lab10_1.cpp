@@ -54,17 +54,6 @@ vector<vector<int>> KVertexCover(vector<vector<int>> &graph, int k)
 
     return vertexCoverList;
 }
-{
-    for (int i = 0; i < matrix.size(); i++)
-    {
-        cout << i << ": ";
-        for (int j = 0; j < matrix[i].size(); j++)
-        {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
 
 int main()
 {
