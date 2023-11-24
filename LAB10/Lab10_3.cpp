@@ -23,7 +23,15 @@ vector<vector<int>> convertFrom3SatToVertexCoverGraph(vector<vector<int>> &claus
     for (int i = 0; i < nVariable; i++)
         addEdge(graph, 2 * i, 2 * i + 1);
 
-    // 2. Create Clause Triangles and add edges between them
+    // 2. Add edges triangles
+    for (int i = 2 * nVariable; i < nVertices; i += 3)
+    {
+        addEdge(graph, i, i + 1);
+        addEdge(graph, i + 1, i + 2);
+        addEdge(graph, i + 2, i);
+    }
+
+    // 3. Create edges between clauses and variables
     int cluaseStartIndex = 2 * nVariable - 1;
     for (auto &clause : clauses)
     {
@@ -37,14 +45,6 @@ vector<vector<int>> convertFrom3SatToVertexCoverGraph(vector<vector<int>> &claus
         }
 
         cluaseStartIndex += 3;
-    }
-
-    // 3. Add edges between clause triangles
-    for (int i = 2 * nVariable; i < nVertices; i += 3)
-    {
-        addEdge(graph, i, i + 1);
-        addEdge(graph, i + 1, i + 2);
-        addEdge(graph, i + 2, i);
     }
 
     return graph;
