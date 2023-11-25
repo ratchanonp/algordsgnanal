@@ -26,26 +26,19 @@ bool isColSafe(vector<vector<int>> &board, int row, int col)
 
 bool isDiagonalSafe(vector<vector<int>> &board, int row, int col)
 {
-    int i = row;
-    int j = col;
+    vector<pair<int, int>> directions = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
-    while (i >= 0 && j >= 0)
+    for (auto dir : directions)
     {
-        if (board[i][j] == 1)
-            return false;
-        i--;
-        j--;
-    }
-
-    i = row;
-    j = col;
-
-    while (i >= 0 && j < board.size())
-    {
-        if (board[i][j] == 1)
-            return false;
-        i--;
-        j++;
+        int i = row;
+        int j = col;
+        while (i >= 0 && i < board.size() && j >= 0 && j < board.size())
+        {
+            if (board[i][j] == 1)
+                return false;
+            i += dir.first;
+            j += dir.second;
+        }
     }
 
     return true;
